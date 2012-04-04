@@ -1,0 +1,22 @@
+{
+	"root": "../www/"
+,	"dev": {
+		"url": "/"
+	}
+,	"ignores": [
+		"dev"
+	]
+,	"types" : [ "less", "js" ]
+,	"typeProps" : {
+		"js" : {
+			"firsts" : [
+				"=~^config"
+			,	"=~^jquery"
+			,	"=~^underscore"
+			,	"=~^handlebars"
+			,	"=~^backbone"
+			]
+		,	"do_source_commands": "none"
+		}
+	}
+}

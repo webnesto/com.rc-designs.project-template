@@ -1,0 +1,109 @@
+// Single line comments only allowed (not technically JSON compliant, but allows for non-value commenting)
+// Use "/" for file paths.  If not, "\" must be escaped (NOTE: will work in Windows either way);
+// TODO: when documenting use - be sure to indicate that any array properties are completely overrwritten when specified in additional build files.
+{
+	"build": "prod"                           // "prod" build type - only valid values are "prod" and "dev"
+,	"root": ""                                // default's to working directory
+// NOTE: "subs" not yet implemented
+//,	"subs": [                                 // series of subfolders to parse as "src" - inherently added to global ignores.
+//		""                                    // working directory
+//	]
+,	"folders": {                              // folders created by builder
+		"scratch": "tmp"                      // directory name/path for temporary file creation during build (will be deleted on cleanup) - created as "root"/"scratch"
+	,	"build":   "bin"                      // target for built files.  NOTE: will be placed inside filetype directory: "root"/[js/css/html]/"build"
+	,	"package": "pkg"                      // TODO: target for package of files (if production.package flag set to true).  NOTE: files will be placed inside filetype sub-directory: "root"/"package"/[js/css/html]
+	}
+,	"doDeletes": "true"                       // when true, target folders contents will be stripped of file type before build insertion (clears out dead wood) - TODO: allow on a type by type basis.
+,	"keepScratch": "false"                    // when true, prevents removal of scratch directory upon completion ( note: if not deleting, and scratch in source dir - scratch should be added to ignores lists )
+,	"types": [ "js","css","html" ]            // types of files to be grouped / built.
+,	"ignores": [                              // global folders ignored ( ignored for all file types )
+		"tmp"                                 // ignoring scratch dir, by default.
+	]
+,	"typeProps": {
+		"js": {
+			"extension": "js"
+//		,	"extension_out": "jcrazy"         // Optional - different extension for generated file(s)
+//		,	"extension_out_dev": "jcrazier"   // Optional - different extension for use in "dev_include" paths ( and imports)
+		,	"block_comment": "/*! -CONTENT- */"
+		,	"dev_include": "document.write('<scr'+'ipt type=\"text/javascript\" src=\"-CONTENT-\"></scr'+'ipt>')"
+		,	"ignores": [                      // Foldernames to ignore
+//				"folderName"                  // Example - ignores folder named "folderName"
+			]
+		,	"firsts": [                       // filenames / patterns (identified by first two characters "=~") to be sorted first in build (takes precedence over "lasts").
+//				"=~^at_set"                   // Example - matches all filenames that start with "b"
+//			,	"=~_"                         // Example - matches any filename that includes "_"
+			]
+		,	"lasts": [                        // filenames / patterns (identified by first tow characters "=~") to be sorted last in build
+//				"at_unset.js"                 // Example - matches file named "at_unset.js"
+			]
+		,	"folder": ""                      // Relative to folders.source (see above) If any value included will target search for files of this type to a specific directory (rather than using all of folders.source)
+		,	"build"	: ""                      // Relative to root.  If any value,  root/[value]/[folders.build]/ will be used instead of root/[extension]/[folders.build]/
+		,	"prepend": ""                     // will prepend all content - good for wrapper functions
+		,	"postpend": ""                    // will finish content - good for closing wrapper functions
+		,	"production_commands" : [         // commands run once for each "built" files in a production build.  Available variables "{scriptsPath}", "{infile}", "{outfile}"
+				"java  -jar \"{scriptsPath}/ext/yuicompressor-2.4.2.jar\" {infile} -o {outfile}  --line-break 1000" // -v"
+			]
+		,	"development_commands" : [        // will be run once for each "built" files in a development build.  Available variables "{scriptsPath}", "{infile}", "{outfile}"
+			]
+		,	"source_commands" : [             // will be run once (TODO: dev/prod tbd) - passed a space separated list of all source files in variable {files} position.
+				"java  -jar  \"{scriptsPath}/ext/jsdoc-toolkit/jsrun.jar\" \"{scriptsPath}/ext/jsdoc-toolkit/app/run.js\" -a -r=10 -d={root}/../docs/js -t={scriptsPath}/ext/jsdoc-toolkit/templates/jsdoc {files}"
+			]
+		,	"do_source_commands": "prod"       // possible values are "dev", "prod", "both", "none"
+		}
+	, "css": {
+			"extension": "css"
+		,	"block_comment": "/*! -CONTENT- */"
+		,	"dev_include": "@import \"-CONTENT-\";"
+		,	"ignores": []
+		,	"firsts": []
+		,	"lasts": []
+		,	"folder": ""
+		,	"build"	: ""
+		,	"prepend": ""
+		,	"postpend": ""
+		,	"production_commands" : [
+				"java  -jar \"{scriptsPath}/ext/yuicompressor-2.4.2.jar\" {infile} -o {outfile}  --line-break 1000 " //-v"
+			]
+		}
+	,	"less": {
+			"extension": "less"
+		,	"extension_out": "css"
+		,	"block_comment": "/* -CONTENT- */"
+		,	"dev_include": "@import \"-CONTENT-\";"
+		,	"ignores": []
+		,	"firsts": []
+		,	"lasts": []
+		,	"folder": ""
+		,	"build"	: "css/bin"
+		,	"prepend": ""
+		,	"postpend": ""
+		,	"production_commands" : [
+				"java -jar \"{scriptsPath}/ext/rhino/js.jar\" \"{scriptsPath}/ext/less-rhino-1.1.5.js\" {infile} {outfile}"
+			,	"java -jar \"{scriptsPath}/ext/yuicompressor-2.4.2.jar\" {infile} -o {outfile}  --line-break 1000 " //-v"
+			]
+		}
+	, "html": {
+			"extension": "html"
+		,	"block_comment": "<!-- -CONTENT- -->"
+		,	"dev_include": "<!--#include virtual=\"-CONTENT-\" -->"
+		,	"ignores": []
+		,	"firsts": []
+		,	"lasts": []
+		,	"folder": ""
+		,	"build"	: ""
+		,	"prepend": ""
+		,	"postpend": ""
+		}
+	}
+,	"prod": {                                 // Only used in production builds
+	 	"package": "false"
+	,	"keep": [                             // Variables for use in preprocessing - keys included will be kept
+//		,	"debug"                           // Example - This would ensure that all code enclosed in #ifdef debug -> #endif blocks will be included (unless innerblock disables)
+//		,	"debugInner"                      // Example - This would ensure that all code encolsed in #ifdef debugInner -> #endif blocks will be included (unless innerblock disables)
+//		,	"etc"                             // Example - And so on
+		]
+	}
+,	"dev": {
+		"url": ""                             // Prepended to all paths in dev build - No trailing slashes
+	}
+}

@@ -1,0 +1,12 @@
+{
+	"root": "../"
+,	"doDeletes": "false"
+,	"ignores": [
+		"imports"
+	,	"tmp"
+	]
+,	"dev": {
+		"url": "/"
+	}
+,	"types": [ "less" ]
+}

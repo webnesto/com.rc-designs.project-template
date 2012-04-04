@@ -1,0 +1,17 @@
+{
+	"root": "../"
+,	"doDeletes": "false"
+,	"ignores": [
+		"imports"
+	,	"tmp"
+	]
+,	"dev": {
+		"url": "/"
+	}
+,	"types": [ "css" ]
+,	"typeProps": {
+		"css" : {
+			"extension" : "foo"
+		}
+	}
+}
