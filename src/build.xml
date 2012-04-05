@@ -6,6 +6,7 @@
 	<target name="[prod]">
 		<exec executable="${perl}">
 			<arg line="${scripts}build.pl" />
+			<arg line="build/build.json" />
 			<arg line="build/${user.name}.json" />
 		</exec>
 		<ant dir= "../www/scripts/" target = "[prod]" />
@@ -20,13 +21,14 @@
             </classpath>
             <arg value="${r.js}"/>
             <arg value="-o"/>
-            <arg value="build/app.build.js" />
+            <arg value="build/build.require.js" />
         </java>
 	</target>
 
 	<target name="[dev]">
 		<exec executable="${perl}">
 			<arg line="${scripts}build.pl" />
+			<arg line="build/build.json" />
 			<arg line="build/build.dev.json" />
 			<arg line="build/${user.name}.json" />
 			<arg line="-dev" />

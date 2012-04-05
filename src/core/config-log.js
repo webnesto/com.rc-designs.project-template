@@ -1,8 +1,8 @@
 var log = {
-	error: false
+	error: true
 ,	warn: true
 ,	debug: true
 
-,	info: false
-,	log: false
+,	info: true
+,	log: true
 };

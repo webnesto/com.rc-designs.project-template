@@ -102,6 +102,7 @@
 //		,	"debugInner"                      // Example - This would ensure that all code encolsed in #ifdef debugInner -> #endif blocks will be included (unless innerblock disables)
 //		,	"etc"                             // Example - And so on
 		]
+	,	"commands": []
 	}
 ,	"dev": {
 		"url": ""                             // Prepended to all paths in dev build - No trailing slashes

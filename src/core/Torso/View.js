@@ -45,7 +45,6 @@ Torso.View = ( function(){
 
 	,	render: function(){
 			$( this.el ).html( this.template( this.model().toJSON() ) );
-			debug.debug( this.el );
 			this.append();
 			return this;
 		}

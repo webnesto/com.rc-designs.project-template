@@ -687,6 +687,32 @@ sub doSourceCommands {
 	printLog( "ending source commands" );
 }
 
+sub doProdCommands {
+	printLog( "beginning production commands" );
+	my ( $config, $location ) = @_;
+	my $typeProps;
+	my $doCommands;
+	my $build = $config->{ build } || $BUILD_PROD;
+	my @commands;
+	my $command;
+	my $scriptPathVar = '{scriptsPath}';
+	my $buildPathVar = '{buildPath}';
+
+	if( $build ne $BUILD_PROD ){
+		return 0;
+	}
+
+	@commands = ( $config->{ prod }->{ commands } ) ? @{ $config->{ prod }->{ commands } } : ();
+	foreach $command ( @commands ){
+		$command =~ s/$scriptPathVar/$Bin/g;
+		$command =~ s/buildPathVar/$location/g;
+		printLog( "	trying: $command" );
+		`$command`;
+	}
+
+	printLog( "ending production commands" );
+}
+
 sub run {
 
 	logStart();

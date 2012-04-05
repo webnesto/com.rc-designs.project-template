@@ -4,14 +4,10 @@
 ,	"ignores": [
 		"imports"
 	,	"tmp"
+	,	"build"
 	]
 ,	"dev": {
 		"url": "/"
 	}
-,	"types": [ "css" ]
-,	"typeProps": {
-		"css" : {
-			"extension" : "foo"
-		}
-	}
+,	"types": [ "less" ]
 }

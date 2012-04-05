@@ -5,6 +5,7 @@
 	}
 ,	"ignores": [
 		"dev"
+	,	"build"
 	]
 ,	"types" : [ "less", "js" ]
 ,	"typeProps" : {

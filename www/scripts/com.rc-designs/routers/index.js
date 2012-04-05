@@ -1,11 +1,13 @@
 require(
     [
-        "com.rc-designs/models/foo"
-    ,	"com.rc-designs/views/Foo/Foo"
+        // "com.rc-designs/models/foo"
+    // ,
+    	"com.rc-designs/views/Foo/Foo"
     ]
 ,   function(
-        fooModel
-    ,	Foo
+        // fooModel
+    // ,
+    	Foo
     ){
     	var
     		_foo
