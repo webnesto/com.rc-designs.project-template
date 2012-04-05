@@ -1,15 +1,31 @@
-<!DOCTYPE html>
-<html>
+<!doctype html>
+<!-- paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/ -->
+<!--[if lt IE 7]>      <html class="no-js ie lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js ie lt-ie9 lt-ie8" lang="en">        <![endif]-->
+<!--[if IE 8]>         <html class="no-js ie lt-ie9" lang="en">               <![endif]-->
+<!--[if IE 9]>         <html class="no-js ie" lang="en">                      <![endif]-->
+<!--[if gt IE 9]><!--> <html class="no-js" lang="en">                     <!--<![endif]-->
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title>Insert title here</title>
-    <script src="/js/bin/includes.js" data-main="/scripts/com.rc-designs/routers/index.js"></script>
+	<meta charset="utf-8">
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<title>Insert title here</title>
+	<meta name="description" content="">
+	<!-- load js(core) + css files (via doc-write build script) - TODO: address "no-js" situation -->
+	<script src="/js/bin/includes.js" data-main="/scripts/com.rc-designs/routers/index.js"></script>
 </head>
 <body>
+	<header>
+		Que?
+	</header>
+	<div role="main">
+		Howdy <strong>partner</strong>: <a href="#foo/cow">foo?</a>
+		<div>
+				Foo test: <div class="Foo">BLAH</div>
+		</div>
+	</div>
+	<footer>
 
-    Howdy <strong>partner</strong>: <a href="#foo/cow">foo?</a>
-    <div>
-        Foo test: <div class="Foo">BLAH</div>
-    </div>
+	</footer>
+
 </body>
 </html>

@@ -1,5 +1,5 @@
 {
-	"root": "../www/"
+	"root": "../www/scripts"
 ,	"dev": {
 		"url": "/"
 	}

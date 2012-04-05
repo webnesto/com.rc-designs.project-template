@@ -1,5 +1,5 @@
 {
-	"root": "../"
+	"root": "../www/"
 ,	"doDeletes": "false"
 ,	"ignores": [
 		"imports"
@@ -10,4 +10,9 @@
 		"url": "/"
 	}
 ,	"types": [ "less" ]
+,	"typeProps": {
+		"less": {
+			"folder": "../www/scripts/"
+		}
+	}
 }

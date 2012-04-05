@@ -521,7 +521,10 @@ sub makeFiles {
 
 					# generate relative path
 
+					$fromFile = Cwd::realpath( $fromFile );
+
 					$relPath = File::Spec->abs2rel( $fromFile, $root ); #$fromFile; #
+
 					#$relPath =~ s/\Q$location\U//;
 					#$relPath =~ s/\\/\//g;
 			#		printLog( "rel? $relPath" );
