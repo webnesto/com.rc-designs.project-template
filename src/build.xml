@@ -12,26 +12,9 @@
 		<exec executable="${perl}">
 			<arg line="${scripts}build.pl" />
 			<arg line="build/build.json" />
-			<arg line="build/build.less.json" />
+			<arg line="build/build.scripts.less.json" />
 			<arg line="build/${user.name}.json" />
 		</exec>
-		<!--
-			Execute Require.js's combine and minify via rhino.jar and closure.jar
-			Reference: Commmand based on https://gist.github.com/825117
-		-->
-		<java classname="org.mozilla.javascript.tools.shell.Main">
-            <classpath>
-                <pathelement location="${scripts}ext/rhino/js.jar" />
-                <pathelement location="${scripts}ext/closure/compiler.jar" />
-            </classpath>
-            <arg value="${scripts}ext/r.js"/>
-            <arg value="-o"/>
-            <arg value="appDir=${root}"/>
-            <arg value="dir=${root}-release"/>
-            <arg value="baseUrl=scripts"/>
-            <arg value="optimize=closure"/>
-            <!-- <arg value="build/build.require.js" /> --><!-- uncomment for module defs if desired -->
-        </java>
 	</target>
 
 	<target name="[dev]">
@@ -45,7 +28,7 @@
 		<exec executable="${perl}">
 			<arg line="${scripts}build.pl" />
 			<arg line="build/build.json" />
-			<arg line="build/build.less.json" />
+			<arg line="build/build.scripts.less.json" />
 			<arg line="build/${user.name}.json" />
 			<arg line="-dev" />
 		</exec>
