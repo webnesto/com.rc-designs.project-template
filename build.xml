@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="builder - com.rc-designs.project-template" default="prod" basedir=".">
+	<target name="prod">
+		<ant dir= "src" target = "[prod]" />
+	</target>
+	<target name="dev">
+		<ant dir= "src" target = "[dev]" />
+	</target>
+</project>

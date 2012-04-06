@@ -5,6 +5,7 @@ document.write('<scr'+'ipt type="text/javascript" src="/../src/core/@lib/jquery-
 document.write('<scr'+'ipt type="text/javascript" src="/../src/core/@lib/underscore.js"></scr'+'ipt>')
 document.write('<scr'+'ipt type="text/javascript" src="/../src/core/@lib/handlebars-1.0.0.beta.6.js"></scr'+'ipt>')
 document.write('<scr'+'ipt type="text/javascript" src="/../src/core/@lib/backbone.js"></scr'+'ipt>')
+document.write('<scr'+'ipt type="text/javascript" src="/../src/core/@lib/backbone.mutators.js"></scr'+'ipt>')
 document.write('<scr'+'ipt type="text/javascript" src="/../src/core/@lib/extend.js"></scr'+'ipt>')
 document.write('<scr'+'ipt type="text/javascript" src="/../src/core/@lib/log.js"></scr'+'ipt>')
 document.write('<scr'+'ipt type="text/javascript" src="/../src/core/@lib/modernizr-2.5.3.js"></scr'+'ipt>')

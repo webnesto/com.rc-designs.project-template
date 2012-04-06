@@ -507,6 +507,7 @@ sub makeFiles {
 
 			@fromFiles = sort $buildSort @{ $files->{ $type }->{ $fileName } };
 			foreach $fromFile ( @fromFiles ){
+				$fromFile = Cwd::realpath( $fromFile );
 				printLog( "	adding $fromFile" );
 				if ( $build eq $BUILD_PROD ) {
 					$tmpFile = parseProdContent( $fromFile, \@argStates, $keepers, $location );
@@ -520,9 +521,6 @@ sub makeFiles {
 					}
 
 					# generate relative path
-
-					$fromFile = Cwd::realpath( $fromFile );
-
 					$relPath = File::Spec->abs2rel( $fromFile, $root ); #$fromFile; #
 
 					#$relPath =~ s/\Q$location\U//;
@@ -578,7 +576,7 @@ sub moveToTarget {
 
 
 	$minPath = File::Spec->catdir( $scratch, $MIN );
-	-e $minPath or mkdir $minPath or warn "Cannot make $minPath: $!";
+	-e $minPath or mkdir $minPath or printLog( "Cannot make minPath: $minPath: $!" );
 
 	foreach $type( keys %{ $files } ){
 		$typeProps = $config->{ typeProps }->{ $type };
@@ -598,11 +596,13 @@ sub moveToTarget {
 			$buildFolder = File::Spec->catdir( $root, $buildFolder );
 		}
 
-		-e $buildFolder or mkdir $buildFolder or warn "Cannot make $buildFolder";
+		$buildFolder = Cwd::realpath( $buildFolder );
 
-		printLog( "	emptying $buildFolder of $ext_out files" );
+		-e $buildFolder or mkdir $buildFolder or printLog( "Cannot make buildFolder: $buildFolder" );
+
 
 		if( $doDeletes ){
+			printLog( "	emptying $buildFolder of $ext_out files" );
 			emptyDirOfType( $buildFolder, $ext_out );
 		}
 
@@ -612,7 +612,7 @@ sub moveToTarget {
 			if(
 				( $build eq $BUILD_PROD )
 			){
-				copy( $file, $minFile ) or warn "Could not copy $file to $minFile: $!";
+				copy( $file, $minFile ) or printLog( "Could not copy $file to $minFile: $!" );
 #				printLog( "running production commands on file: $file" );
 				foreach $command ( @commands ){
 					my $scriptPath = '{scriptsPath}';
@@ -625,11 +625,11 @@ sub moveToTarget {
 					`$command`;
 				}
 			} else {
-				copy( $file, $minFile ) or warn "Could not copy $file to $minFile: $!";
+				copy( $file, $minFile ) or printLog( "Could not copy $file to $minFile: $!" );
 			}
 
 			$finalFile = File::Spec->catfile( $buildFolder, "$fileName.$ext_out" );
-			copy( $minFile, $finalFile ) or warn "Could not copy $minFile, to $finalFile: $!";
+			copy( $minFile, $finalFile ) or printLog( "Could not copy $minFile, to $finalFile: $!" );
 
 			printLog("	created $finalFile" );
 		}
@@ -730,7 +730,7 @@ sub run {
 	#TODO: implement subs iteration - allow arguments for subs - default "current" directory.
 
 	my ( $files, $filesForSourceCommands ) = getFilenamesByType( $location, $config, {} );
-	-e $scratch or mkdir $scratch, 0777 or warn "Cannot make $scratch directory: $!";
+	-e $scratch or mkdir $scratch, 0777 or printLog( "Cannot make scratchDirectory: $scratch $!" );
 	makeFiles( $config, $files, $location );
 	moveToTarget( $config, $files, $location );
 
@@ -742,9 +742,9 @@ sub run {
 		$scratch = File::Spec->catfile( $location, $scratch );
 		$minPath = File::Spec->catdir( $scratch, $MIN );
 		emptyDirOfType( $minPath, ".*" );
-		rmdir $minPath or warn "Cannot delete $minPath";
+		rmdir $minPath or printLog( "Cannot delete $minPath" );
 		emptyDirOfType( $scratch, ".*" );
-		rmdir $scratch or ( warn "Cannot delete $scratch" and my $err = 1 );
+		rmdir $scratch or ( printLog( "Cannot delete $scratch" and my $err = 1 ) );
 		if( !defined( $err ) ){
 			printLog( "scratch directory deleted\n" );
 		}

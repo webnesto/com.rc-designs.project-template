@@ -127,7 +127,7 @@ sub emptyDirOfType {
 	my @files;
 
 	if( ! -e $dir ){
-		warn "Can't empty $dir: $!";
+		printLog( "Can't empty $dir: $!" );
 		return 0;
 	}
 

@@ -1,18 +1,10 @@
 {
-	"root": "../www/"
-,	"doDeletes": "false"
-,	"ignores": [
-		"imports"
-	,	"tmp"
-	,	"build"
-	]
-,	"dev": {
-		"url": "/"
-	}
+	"doDeletes": "false"
 ,	"types": [ "less" ]
 ,	"typeProps": {
 		"less": {
 			"folder": "../www/scripts/"
+		,	"build": "../www/css/bin/"
 		}
 	}
 }
