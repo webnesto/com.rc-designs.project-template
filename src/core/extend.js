@@ -54,8 +54,31 @@ var extend = ( function(){
 			}
 		} //_.extend(child.prototype, protoProps);
 
+		var _constructor_super = parent;
+
 		// Add static properties to the constructor function, if supplied.
-		if (staticProps) _.extend(child, staticProps);
+		if (staticProps){
+			// Copy the properties over onto the new prototype
+			for(var name in staticProps) {
+				// Check if we're overwriting an existing function
+				child[name] = typeof staticProps[name] == "function" && typeof _constructor_super[name] == "function" && fnTest.test(staticProps[name]) ? (function(name, fn) {
+					return function() {
+						var tmp = this._super;
+
+						// Add a new ._super() method that is the same method
+						// but on the super-class
+						this._super = _constructor_super[name];
+
+						// The method only need to be bound temporarily, so we
+						// remove it when we're done executing
+						var ret = fn.apply(this, arguments);
+						this._super = tmp;
+
+						return ret;
+					};
+				})(name, staticProps[name]) : staticProps[name];
+			}
+		} // _.extend(child, staticProps);
 
 		// Correctly set child's `prototype.constructor`.
 		child.prototype.constructor = child;

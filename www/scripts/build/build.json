@@ -1,0 +1,19 @@
+{
+	"root": "../"
+,	"doDeletes": "false"
+,	"dev": {
+		"url": "/"
+	}
+,	"ignores": [
+		"dev"
+	,	"build"
+	]
+,	"types": [ "less" ]
+,	"typeProps": {
+		"less": {
+		// 	"folder": "../www/scripts/"
+		// ,	
+			"build": "../www/css/bin/"
+		}
+	}
+}

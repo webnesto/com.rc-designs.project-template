@@ -1,6 +1,12 @@
-define( function(){
+define( 
+	[
+		"torso/Model"
+	] 
+,	function(
+		Model
+	){
 
-		return Torso.Model.extend( {
+		return Model.extend( {
 			// initialize: function(){
 				// this._super.apply( this, arguments );
 			// }

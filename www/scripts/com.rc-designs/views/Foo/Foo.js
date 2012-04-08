@@ -1,15 +1,18 @@
 log.debug( "foo load begin" );
 define(
 	[
-		"lib/text!./Default.html"
+		"com.rc-designs/views/View"
+	,	"lib/text!./Default.html"
 	,	"lib/text!./Foo.html"
 	]
 ,	function(
-		defaultHtml
+		View
+	,	defaultHtml
 	,	fooHtml
 	){
+		var _View;
 
-		return Torso.View.extend( {
+		_View = View.extend( {
 			initialize: function(){
 				this._html = defaultHtml;
 				this._super();
@@ -22,15 +25,15 @@ define(
 				if(
 					data
 				// && 	typeof data.foo !== "undefined"
-				&& 	!data.foo
+				// && 	!data.foo
 				&&	this._html == fooHtml
 				){
-					log.debug("got no foo");
+					// log.debug("got no foo");
 					// this._offTemplate = this._template;
 					// this._template = this._altTemplate;
 					this._html = defaultHtml;
 					this._template = false;
-					data.foo = "moo";
+					// data.foo = "moo";
 				}
 				else if( this._html == defaultHtml ){
 					this._html = fooHtml;
@@ -41,5 +44,9 @@ define(
 				return this._super( data );
 			}
 		} );
+
+		_View.test()
+
+		return _View;
 	}
 )

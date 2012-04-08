@@ -4,8 +4,8 @@
     optimize: "closure",
     dir: "www-release/",
     modules: [
-        // {
-            // name: "com.rc-designs/routers/index"
-        // }
+        {
+            name: "com.rc-designs/routers/index"
+        }
     ]
 })

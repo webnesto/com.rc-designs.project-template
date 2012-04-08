@@ -1,18 +1,30 @@
 ( function( global ){
 
-	var rel = "stylesheet";
+	var rel = 'stylesheet';
 //#ifdef dev
-	rel = "stylesheet/less";
+	rel = 'stylesheet/less';
 //#endif
 	var _includes = [
-		"/css/bin/core.css"
-	,	"/css/bin/com.rc-designs.css"
+		{ 
+			item: '/css/bin/core.css' 
+		,	extra: ''
+		}
+	// ,	{ 
+	// 		item: '/css/bin/screen.css' 
+	// 	,	extra: 'media="screen and (min-width : 640px)"'
+	// 	}
+	,	{ 
+			item: '/css/bin/com.rc-designs.css' 
+		,	extra: ''
+		}
 	];
 	var i;
 	var l = _includes.length;
+	var inc;
 
 	for( i = 0; i < l; i++ ){
-		document.write('<link href="' + _includes[ i ] + '" rel="' + rel  + '" type="text/css" />');
+		inc = _includes[ i ];
+		document.write('<link href="' + inc.item + '" rel="' + rel  + '" ' + inc.extra + '  type="text/css" />');
 	}
 
 }( this ) );

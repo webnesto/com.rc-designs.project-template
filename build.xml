@@ -3,7 +3,8 @@
 	<property file="${user.name}.properties"/>
 	<property file="build.properties"/>
 	<target name="prod">
-		<ant dir= "src" target = "[prod]" />
+		<ant dir= "src" target= "[prod]" />
+		<ant dir="www/scripts" target= "[prod]" />
 		<!--
 			Execute Require.js's combine and minify via rhino.jar and closure.jar
 			Reference: Commmand based on https://gist.github.com/825117
@@ -19,6 +20,11 @@
         </java>
 	</target>
 	<target name="dev">
-		<ant dir= "src" target = "[dev]" />
+		<ant dir="src" target = "[dev]" />
+		<ant dir="www/scripts" target = "[dev]" />
+		<exec executable="perl">
+			<arg line="${scripts}css31flavors.pl" />
+			<arg line="${output.css}" />
+		</exec>
 	</target>
 </project>

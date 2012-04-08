@@ -1,4 +1,5 @@
 /* GENERATED FILE - DO NOT EDIT */
 @import "/../src/core/css/@base.less";
-@import "/../src/core/css/boilerplate.less";
+@import "/../src/core/css/@normalize.less";
 @import "/../src/core/css/global.less";
+@import "/../src/core/css/print.less";

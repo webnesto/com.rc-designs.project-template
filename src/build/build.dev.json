@@ -1,8 +1,5 @@
 {
-	"dev": {
-		"url": "/"
-	}
-,	"ignores": [
+	"ignores": [
 		"build"
 	]
 }

@@ -1,20 +1,18 @@
 require(
     [
-        // "com.rc-designs/models/foo"
-    // ,
-    	"com.rc-designs/views/Foo/Foo"
+    	"torso/Router"
+    ,	"com.rc-designs/views/Foo/Foo"
     ]
 ,   function(
-        // fooModel
-    // ,
-    	Foo
+        Router
+    ,	Foo
     ){
     	var
     		_foo
     	;
 
 	    $( document ).ready( function(){
-	        new ( Torso.Router.extend( {
+	        new ( Router.extend( {
 		    	routes: {
 		    		"foo/:id": "showThing"
 		    	,	"foo/:id/:cow": "showThing"

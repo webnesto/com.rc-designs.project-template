@@ -213,6 +213,7 @@ sub parseProdContent {
 
 			if ( $line =~ /\#build_import\s*([^\s]*)/ ) {
 				$importPath = File::Spec->catfile( $location, $1 );
+				printLog( " prod - importing: $importPath \n\n" );
 				$ret.= parseProdContent( $importPath, \@argStates, \@includedArgs, $location );
 			} else {
 
@@ -510,7 +511,7 @@ sub makeFiles {
 				$fromFile = Cwd::realpath( $fromFile );
 				printLog( "	adding $fromFile" );
 				if ( $build eq $BUILD_PROD ) {
-					$tmpFile = parseProdContent( $fromFile, \@argStates, $keepers, $location );
+					$tmpFile = parseProdContent( $fromFile, \@argStates, $keepers, $root );
 					print FILE $tmpFile if $tmpFile;
 				} elsif ( $build eq $BUILD_DEV ) {
 					my $tmpStr;

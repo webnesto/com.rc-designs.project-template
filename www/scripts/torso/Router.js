@@ -1,5 +1,4 @@
-var Torso = Torso || {};
-Torso.Router = ( function(){
+define( function(){
 
 	// simplified $.deparam analog
 	// function deparam (paramString){
@@ -48,4 +47,4 @@ Torso.Router = ( function(){
 			// return new RegExp( route );
 		// }
 	} );
-}() );
+} );
