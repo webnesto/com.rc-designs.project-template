@@ -12,5 +12,5 @@ document.write('<scr'+'ipt type="text/javascript" src="/../src/core/helpers.hand
 document.write('<scr'+'ipt type="text/javascript" src="/../src/core/log.js"></scr'+'ipt>')
 document.write('<scr'+'ipt type="text/javascript" src="/../src/core/modernizr-2.5.3.js"></scr'+'ipt>')
 document.write('<scr'+'ipt type="text/javascript" src="/../src/core/plugin.jquery/jquery.ba-bbq.js"></scr'+'ipt>')
-document.write('<scr'+'ipt type="text/javascript" src="/../src/core/plugin.jquery/testPlugin.js"></scr'+'ipt>')
+document.write('<scr'+'ipt type="text/javascript" src="/../src/core/plugin.jquery/foo.js"></scr'+'ipt>')
 document.write('<scr'+'ipt type="text/javascript" src="/../src/core/require.js"></scr'+'ipt>')
