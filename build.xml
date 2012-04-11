@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project name="builder - com.rc-designs.project-template" default="prod" basedir=".">
-	<property file="${user.name}.properties"/>
-	<property file="build.properties"/>
+	<property file="build/${user.name}.properties"/>
+	<property file="build/build.properties"/>
 	<target name="prod">
 		<ant dir= "src" target= "[prod]" />
 		<ant dir="www/scripts" target= "[prod]" />
@@ -16,7 +16,7 @@
             </classpath>
             <arg value="${scripts}ext/r.js"/>
             <arg value="-o"/>
-            <arg value="${basedir}/build.require.js" />
+            <arg value="${basedir}/build/build.require.js" />
         </java>
 	</target>
 	<target name="dev">
