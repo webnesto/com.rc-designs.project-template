@@ -10,12 +10,13 @@ other templates/projects, and a small bit of my own innovation and approach.
 
 The readme contains the following main sections:
 
-+ Installation
-+ System requirements
-+ Building and File locations
-+ Credits
++ [Installation](#ins)
++ [System requirements](#req)
++ [How To Use](#how)
++ [Building](#bld)
++ [Credits](#crd)
 
-Installation
+<a name="ins"></a>Installation 
 ------------
 This section documents installation instructions for Web Project Template.
 
@@ -31,7 +32,7 @@ If you're adventurous and reasonably intelligent, you might use this project tem
 way to familiarize yourself with some of the included libs or the patterns being utilized.
 Fair warning, this project isn't intended to be a tutorial though.
 
-System Requirements
+<a name="req"></a>System Requirements
 -------------------
 For easy setup/use of the project (particularly the builders), you'll probably need:
 - Java (min version TBD)
@@ -47,34 +48,97 @@ If you're on Windows and thus, don't have Perl, your easiest bet is to just inst
 If you're not on Windows, your built in Perl installation should work fine unless you're on
 a really old version.
 
-Building and File locations
+<a name="how"></a>How To Use
+----------
+
+TODO: include instructions for basic use, what first steps might be, etc.
+
+Here's the breakdown of the major file locations (not 100% of them - some you might have to figure out
+on your own.):
+
++ src/core/ 
+> This is where the base of your system lives.  Your global css, your js libs, and so forth.
++ src/core/css/
++ src/core/css/@base.less 
+> this is where all your less variable, mixin, and such coolness goes.  Why here? So that it's easy to import elsewhere.  You can use anything defined here in your global.less or /www/scripts/[app]/views files too.
++ src/core/css/@normalize.less
++ src/core/css/global.less 
+> here's where you put your absolutely global css (really think about it before 
+you put something here, remember - after 3-6 months and a few hundred files, you won't be able to take 
+anything OUT of here without regressing EVERY SINGLE VIEW IN YOUR APPLICATION... so don't muck it up with
+icky BS.)
++ src/core/css/print.less
+> guess what this is for.  No really.  Guess.
++ src/core/js/@lib/
+> this is where all your old-school javascript libraries live and all get built into one big
+file housed at:
+	/www/js/bin/core.js
+(don't worry about including it, it's alreayd included via the /src/includes file)
++ src/core/js/helpers.handlebars
++ src/core/js/plugin.jquery 
+> if you're adding more jquery plugins (or writing your own), they go here (I've included $.bbq 
+'cause I like it and use it a lot. YMMV)
++ src/core/js/extend.js
++ src/core/js/log.js
++ src/core/config-log.js
++ src/core/config-require.js
+
++ src/dev
++ src/dev/config-less.js
++ src/img
++ src/includes
++ src/includes/includes.css.js
++ src/includes/includes.js.js
+
++ www/scripts/com.rc-designs
++ www/scripts/com.rc-designs/models
++ www/scripts/com.rc-designs/views
++ www/scripts/com.rc-designs/lib
++ www/scripts/com.rc-designs/pages
++ www/scripts/com.rc-designs/torso
++ www/scripts/com.rc-designs/utils
++ www/index.html
+
+
+<a name="bld"></a>Building
 ---------------------------
 You need Java, Perl, and Ant to build with this template.  Someday I might redo all of this 
 to run exclusively in JS for use with node.js, but for now it's a smattering of things that 
 are either already installed on your computer, or are easy to install.
 
-###/src/core### 
-This is where the base of your system lives.  Your global css, your js libs, and so forth.
+Assuming you haven't made any significant changes and have your system requirements, you should
+be able to run ant from the root of your project.  I.E. either command line into your project root
+and type "ant" for a production build or "ant dev" to target the dev build (keep reading for the 
+difference).
 
-####css####
-Your css base goes in here:  
-+ /src/core/css/@base.less - this is where all your less variable, mixin, and such coolness goes.  Why here? So that it's easy to import elsewhere.  You can use anything defined here in your global.less or /www/scripts/[app]/views files too.
-+ /src/core/css/global.less - here's where you put your absolutely global css (really think about it before 
-you put something here, remember - after 3-6 months and a few hundred files, you won't be able to take 
-anything OUT of here without regressing EVERY SINGLE VIEW IN YOUR APPLICATION... so don't muck it up with
-icky BS.)
-+ /src/core/css/print.less - guess what this is for.  No really.  Guess.
+###Build Types:
++ Dev builds
+> In a dev build your js (src/*) and css/less (src/*, and www/scripts/* ) files will be used directly 
+> (via document writes) so you can live edit your files and see changes without having to run a build 
+> every time you make a change. (Note: with this and all other of the build type files, if you add a 
+> NEW file, you will always have to run a build unless that file is used exclusively through the JS 
+> module pattern).
++ Production builds (default)
+> In a production build, all your js/css|less files (as in the dev build) will be combined, minified 
+> (optionally) and then a require.js build will be run, producing the www-release directory (upon 
+> which the closure compiler will be run (optionally)).  
 
-####js####
-this is where all your old-school javascript libraries live and all get built into one big
-file housed at:
-	/www/js/bin/core.js
-(don't worry about including it, it's alreayd included via the /src/includes file)
+###Build Configuration:
+If you need to modify the build(s) to suit your own purposes, the ant build files (and the location 
+of their config files) are located:
 
-NOTE: if you're adding more jquery plugins (or writing your own), they go here:
-	/src/core/js/@lib/plugin.jquery/
++ /build.xml ( /build/* )
++ /src/build.xml ( /src/build/* )
++ /www/scripts/build.xml ( /www/scripts/build/* )
 
-Credits
+So, for example if you need/want to set some user specific values for your base build properties (like
+a custom path for perl), and your system username is "fooman" you would drop in this file:
+> /build/fooman.properties
+
+For more details about building, check the incorporated build system documentation (either from the 
+buildthekraken project or the require.js builder ).
+
+<a name="crd"></a>Credits
 -------
 In no particular order, here's all the other projects that are making my work possible:
 
