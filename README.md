@@ -58,7 +58,7 @@ on your own.):
 
 + src/core/ 
 
-> This is where the base of your system lives.  Your global css, your js libs, and so forth.
+>> This is where the base of your system lives.  Your global css, your js libs, and so forth.
 
 + src/core/css/
 + src/core/css/@base.less 
