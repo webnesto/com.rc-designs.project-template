@@ -40,7 +40,7 @@ define (
 						!this._template
 					||	(
 							this._template.empty
-						 &&	this._html
+						&&	this._html
 						)
 					){
 						if( this._html ){
