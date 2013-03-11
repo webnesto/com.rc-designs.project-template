@@ -8,11 +8,13 @@ require(
     ,	Foo       //:View for rendering
     ){
 		var _foo;
+		var _views = [];
 
 		$( document ).ready( function(){
 			new ( Router.extend( {
 				routes: {
-					"foo/:id": "showFoo"
+					"": "baseState"
+				,	"foo/:id": "showFoo"
 				,	"foo/:id/": "showFoo"
 				,	"foo/:id/:cow": "showFoo"
 				,	"foo/:id/:cow/": "showFoo"
@@ -20,11 +22,21 @@ require(
 				// catch all (i.e. 404)
 				,	"*any": "showError"
 				}
+			,	baseState: function(){
+					var i, l;
+
+					// Hide All
+					for( i = 0, l = _views.length; i < l; i++ ){
+						_views[ i ].hide();
+					}
+
+				}
 
 			,	showFoo: function( foo, cow ) {
 					//do a thing with a thing
 					if( !_foo ){
 						_foo = new Foo();
+						_views.push( _foo );
 					}
 
 					_foo.data(

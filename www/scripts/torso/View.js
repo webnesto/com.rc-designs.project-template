@@ -23,6 +23,8 @@ define (
 
 					this._template = false;
 
+					this._children = [];
+
 					if( _inits.data ) {
 						this.data( _inits.data );
 					}
@@ -55,9 +57,17 @@ define (
 				}
 
 			,	render: function(){
-					$( this.el ).html( this.template( this.data().toJSON() ) );
+					this.$el.html( this.template( this.data().toJSON() ) );
 					this.append();
 					return this;
+				}
+
+			,	show: function(){
+					this.$el.show();
+				}
+
+			,	hide: function(){
+					this.$el.hide();
 				}
 
 			,	append: function(){
@@ -65,6 +75,7 @@ define (
 						$( this.container() ).append( this.el );
 						this._needAttach = false;
 					}
+
 					return this;
 				}
 
@@ -79,7 +90,34 @@ define (
 
 					return this.model;
 				}
+
+
+			,	addChild: function( child ){
+					var _that = this;
+					
+					child.view.container = function(){
+						return _that.$( child.selector );
+					};
+					
+					child.view._needAttach = true;
+					
+					this._children.push( child );
+
+					return this;
+				}
+
+			,	addChildren: function( children ){
+					var i, l;
+					
+					for( i = 0, l = chidren.length; i < l; i++ ){
+						this.addChild( children[ i ] );
+					}
+
+					return this;
+				}
+
 			}
+
 		);
 
 		return _View;
